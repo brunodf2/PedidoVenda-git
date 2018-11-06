@@ -1,0 +1,55 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de clientes</ui:define>
+
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Pesquisa de clientes</h1>
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel" style="width: 100%">
+				<p:outputLabel value="CPF/CNPJ"/>
+				<p:inputText size="25"/>
+				
+				<p:outputLabel value="Nome"/>
+				<p:inputText size="60"/>
+			</p:panelGrid>
+			
+			<p:dataTable id="pedidosTable" value="#{pesquisaClienteBean.clientesFiltrados}"  var="cliente"
+				style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado." rows="10" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom" rowsPerPageTemplate="10, 20, 30" >
+				<p:column headerText="Nome" style="text-align: left;" >
+					<h:outputText value="Supermercado João das Couves Ltda"/>
+				</p:column>
+				<p:column headerText="Tipo" style="text-align: left; width: 50px">
+					<h:outputText value="Jurídica"/>
+				</p:column>
+				<p:column headerText="CPF/CNPJ" style="text-align: left; width: 120px">
+					<h:outputText value="02.493.738/0001-83"/>
+				</p:column>
+				<p:column style="text-align: center; width: 80px">
+					<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:button icon="ui-icon-trash" title="Apagar"/>
+				</p:column>
+						
+			</p:dataTable>
+
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
