@@ -39,7 +39,39 @@
 			<p:inputText id="email" required="true" size="40" maxlength="40" />
 		</p:panelGrid>
 		<br/>
-		<p:button value="Adicionar endereço" style="text-align: center; width: 120px"/>
+		<p:commandButton value="Adicionar endereço" style="text-align: center; width: 120px"
+			 oncomplete="PF('inclusaoEndereco').show()"/>
+		
+		<p:dialog header="Inclusão de endereço" widgetVar="inclusaoEndereco">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Logradouro" for="logradouro"/>
+				<p:inputText id="logradouro" size="45"/>
+				
+				<p:outputLabel value="Número" for="numero"/>
+				<p:inputText id="numero" size="5"/>
+				
+				<p:outputLabel value="Complemento" for="complemento"/>
+				<p:inputText id="complemento" size="30"/>
+				
+				<p:outputLabel value="CEP" for="cep"/>
+				<p:inputText id="cep" size="15"/>
+
+				<p:outputLabel value="Cidade" for="cidade" />
+				<h:panelGroup>
+					<p:inputText id="cidade" size="30" />
+					<p:outputLabel value="UF" for="uf"
+						style="margin-right: 5px; margin-left: 5px" />
+					<p:inputText id="uf" size="5" />
+				</h:panelGroup>		
+				
+				<p:spacer/>
+				
+				<p:commandButton value="Incluir" />
+				
+			</p:panelGrid>
+			
+			
+		</p:dialog>
 
 		<p:dataTable id="enderecoTable" value="#{pesquisaEnderecoBean.enderecoFiltrado}"
 						style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
@@ -65,10 +97,19 @@
 			</p:column>
 			<p:column style="text-align: center; width: 80px">
 				<p:button icon="ui-icon-pencil" title="Editar" />
-				<p:button icon="ui-icon-trash" title="Apagar"/>
+				<p:commandButton icon="ui-icon-trash" title="Apagar"
+					 oncomplete="PF('confirmacaoExclusao').show()"/>
 			</p:column>
-
 		</p:dataTable>
+
+		<p:confirmDialog header="Exclusão de produto"
+			message="Tem certeza que deseja excluir o cliente?"
+			widgetVar="confirmacaoExclusao">
+			<p:button value="Não"
+				onclick="PF('confirmacaoExclusao').hide(); return false;" />
+			<p:commandButton value="Sim"
+				oncomplete="PF('confirmacaoExclusao').hide();" />
+		</p:confirmDialog>
 
 
 
