@@ -3,10 +3,12 @@ package com.algaworks.pedidovenda.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
-@ManagedBean
+import com.algaworks.pedidovenda.service.NegocioException;
+
+@Named
 @RequestScoped
 public class CadastroPedidoBean {
 	
@@ -17,8 +19,15 @@ public class CadastroPedidoBean {
 		itens.add(1);
 	}
 
+	
+	public void salvar() {
+		throw new NegocioException("Pedido não pode ser salvo, pois ainda nao foi implementado. ");
+	}
+	
 	public List<Integer> getItens() {
 		return itens;
 	}
+	
+
 	
 }
