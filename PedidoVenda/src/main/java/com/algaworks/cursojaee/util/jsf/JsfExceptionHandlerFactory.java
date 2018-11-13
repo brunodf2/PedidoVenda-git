@@ -3,11 +3,11 @@ package com.algaworks.cursojaee.util.jsf;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerFactory;
 
-public class JsfExceptionHandleFactory extends ExceptionHandlerFactory {
+public class JsfExceptionHandlerFactory extends ExceptionHandlerFactory {
 	
 	private ExceptionHandlerFactory parent;
 	
-	public JsfExceptionHandleFactory(ExceptionHandlerFactory parent) {
+	public JsfExceptionHandlerFactory(ExceptionHandlerFactory parent) {
 		this.parent = parent;
 	}
 

@@ -6,9 +6,10 @@
     version="2.2">
     
     <factory>
-    	<exception-handler-factory>
-    		com.algaworks.cursojaee.util.jsf.JsfExceptionHandleFactory
-    	</exception-handler-factory>
-    </factory>
+		<exception-handler-factory>
+			com.algaworks.cursojaee.util.jsf.JsfExceptionHandlerFactory
+		</exception-handler-factory>
+	</factory>
 
+    
 </faces-config>
