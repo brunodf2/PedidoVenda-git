@@ -2,6 +2,9 @@ package com.algaworks.pedidovenda.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class EnderecoEntrega implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -16,7 +19,7 @@ public class EnderecoEntrega implements Serializable {
 	
 	
 
-
+	
 	public String getLogradouro() {
 		return logradouro;
 	}

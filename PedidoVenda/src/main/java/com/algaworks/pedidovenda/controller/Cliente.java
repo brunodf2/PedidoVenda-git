@@ -1,4 +1,4 @@
-package com.algaworks.pedidovenda.controller;
+/*package com.algaworks.pedidovenda.controller;
 
 import java.io.Serializable;
 
@@ -37,4 +37,4 @@ public class Cliente implements Serializable {
 	
 	
 
-}
+}*/

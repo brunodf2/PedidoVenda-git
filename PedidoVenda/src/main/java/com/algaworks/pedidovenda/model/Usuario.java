@@ -4,6 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -14,7 +26,8 @@ public class Usuario implements Serializable {
 	private String 			senha;
 	private List<Grupo> 	grupo = new ArrayList<>();
 	
-	
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -27,6 +40,7 @@ public class Usuario implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	@Column(unique = true)
 	public String getEmail() {
 		return email;
 	}
@@ -39,6 +53,9 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"),
+		inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	public List<Grupo> getGrupo() {
 		return grupo;
 	}

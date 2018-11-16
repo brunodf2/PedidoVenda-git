@@ -6,6 +6,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "pedido")
 public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -16,6 +32,7 @@ public class Pedido implements Serializable {
 	private Date dataEntrega;
 	private BigDecimal valorFrete;
 	private BigDecimal valorTotal;
+	private BigDecimal valorDesconto;
 	private StatusPedido status;
 	private FormaPagamento formaPagamento;
 	private Usuario vendedor;
@@ -23,13 +40,15 @@ public class Pedido implements Serializable {
 	private EnderecoEntrega enderecoEntrega;
 	private List<ItemPedido> itens = new ArrayList<>();
 	
-	
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
@@ -42,6 +61,7 @@ public class Pedido implements Serializable {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+	@Temporal(TemporalType.DATE)
 	public Date getDataEntrega() {
 		return dataEntrega;
 	}
@@ -60,36 +80,50 @@ public class Pedido implements Serializable {
 	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
+	public BigDecimal getValorDesconto() {
+		return valorDesconto;
+	}
+	public void setValorDesconto(BigDecimal valorDesconto) {
+		this.valorDesconto = valorDesconto;
+	}
+	@Enumerated(EnumType.STRING)
 	public StatusPedido getStatus() {
 		return status;
 	}
 	public void setStatus(StatusPedido status) {
 		this.status = status;
 	}
+	@Enumerated(EnumType.STRING)
 	public FormaPagamento getFormaPagamento() {
 		return formaPagamento;
 	}
 	public void setFormaPagamento(FormaPagamento formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
+	@ManyToOne
+	@JoinColumn(name = "vendedor_id")
 	public Usuario getVendedor() {
 		return vendedor;
 	}
 	public void setVendedor(Usuario vendedor) {
 		this.vendedor = vendedor;
 	}
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
 	public Cliente getCliente() {
 		return cliente;
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	@Embedded
 	public EnderecoEntrega getEnderecoEntrega() {
 		return enderecoEntrega;
 	}
 	public void setEnderecoEntrega(EnderecoEntrega enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
 	}
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<ItemPedido> getItens() {
 		return itens;
 	}
